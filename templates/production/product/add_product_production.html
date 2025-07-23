@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Product</h1>
+<div class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Add New Product</h2>
+    <form id="addProductForm" method="POST" action="{{ url_for('add_production_product') }}">
+        <div class="space-y-4">
+            <div>
+                <label for="product_id" class="block text-sm font-medium text-gray-700">ID<span class="text-red-500">*</span></label>
+                <input type="text" id="product_id" name="product_id" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Contoh: GE1">
+            </div>
+            <div>
+                <label for="product_name" class="block text-sm font-medium text-gray-700">Product Name<span class="text-red-500">*</span></label>
+                <input type="text" id="product_name" name="product_name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Nama Produk">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity<span class="text-red-500">*</span></label>
+                    <input type="number" id="quantity" name="quantity" required min="1" value="1" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="inspection" class="block text-sm font-medium text-gray-700">Inspection<span class="text-red-500">*</span></label>
+                    <select id="inspection" name="inspection" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <option value="" disabled selected>Choose Status</option>
+                        <option value="Accept">Accept</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+             <div>
+                <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                <textarea id="notes" name="notes" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Catatan inspeksi..."></textarea>
+            </div>
+        </div>
+        <div class="flex items-center justify-end space-x-3 mt-8">
+            <a href="{{ url_for('view_production_product') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg">Cancel</a>
+            <button type="button" onclick="window.confirmGenericSubmit('addProductForm', 'menambahkan produk baru ini')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">Save Product</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Work in Progress</h1>
+<div class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Add New WIP Detail</h2>
+    <form id="addWipForm" method="POST" action="{{ url_for('add_wip_detail') }}">
+        <div class="space-y-4">
+            <div>
+                <label for="wip_id" class="block text-sm font-medium text-gray-700">WIP ID<span class="text-red-500">*</span></label>
+                <input type="text" id="wip_id" name="wip_id" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="product_name" class="block text-sm font-medium text-gray-700">Product Name<span class="text-red-500">*</span></label>
+                <input type="text" id="product_name" name="product_name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity<span class="text-red-500">*</span></label>
+                    <input type="number" id="quantity" name="quantity" required min="1" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="process" class="block text-sm font-medium text-gray-700">Process<span class="text-red-500">*</span></label>
+                    <input type="text" id="process" name="process" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="status" class="block text-sm font-medium text-gray-700">Status<span class="text-red-500">*</span></label>
+                    <select id="status" name="status" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <option value="" disabled selected>Choose Status</option>
+                        <option value="warehouse">warehouse</option>
+                        <option value="package">package</option>
+                        <option value="separator">separator</option>
+                        <option value="queue">queue</option>
+                        <option value="installation">installation</option>
+                        <option value="queue half">queue half</option>
+                        <option value="assembly">assembly</option>
+                        <option value="paint">paint</option>
+                        <option value="inspection">inspection</option>
+                        <option value="finished">finished</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="estimated_time" class="block text-sm font-medium text-gray-700">Estimated Time</label>
+                    <input type="text" id="estimated_time" name="estimated_time" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Contoh: 30'">
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-end space-x-3 mt-8">
+            <a href="{{ url_for('view_wip_detail') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg">Cancel</a>
+            <button type="button" onclick="window.confirmGenericSubmit('addWipForm', 'menambahkan data WIP')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">Save WIP</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

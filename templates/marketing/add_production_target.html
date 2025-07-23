@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="bg-white p-0.5 rounded-lg shadow-md max-w-2xl mx-auto">
+    <div class="bg-orange-400 text-white p-4 rounded-t-lg mb-0">
+        <h2 class="text-xl font-semibold">Input Production Target</h2>
+    </div>
+    <div class="p-6">
+        <form id="addTargetForm" method="POST" action="{{ url_for('add_production_target') }}">
+            <div class="mb-4">
+                <label for="period" class="block text-sm font-medium text-gray-700 mb-1">Period (e.g., 2024-Q3) <span class="text-red-500">*</span></label>
+                <input type="text" id="period" name="period" value="{{ item.period if item else '' }}" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" placeholder="Contoh: 2024-Q nächsten Monats">
+            </div>
+            <div class="mb-4">
+                <label for="product" class="block text-sm font-medium text-gray-700 mb-1">Product <span class="text-red-500">*</span></label>
+                <input type="text" id="product" name="product" value="{{ item.product if item else '' }}" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" placeholder="Nama Produk">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label for="production_target" class="block text-sm font-medium text-gray-700 mb-1">Production Target <span class="text-red-500">*</span></label>
+                    <input type="number" id="production_target" name="production_target" value="{{ item.production_target if item else '' }}" required min="0" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" placeholder="Target Produksi">
+                </div>
+                <div>
+                    <label for="forecast" class="block text-sm font-medium text-gray-700 mb-1">Forecast (from prev. data) <span class="text-red-500">*</span></label>
+                    <input type="number" id="forecast" name="forecast" value="{{ item.forecast if item else '' }}" required min="0" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" placeholder="Jumlah Forecast">
+                </div>
+            </div>
+            <div class="flex items-center justify-end space-x-3">
+                <a href="{{ url_for('view_production_target') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg transition duration-150 ease-in-out">
+                    Batal
+                </a>
+                <button type="button" onclick="window.confirmGenericSubmit('addTargetForm', 'menambahkan target produksi ini')" class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg transition duration-150 ease-in-out">
+                    Simpan Target
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

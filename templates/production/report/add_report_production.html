@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Add Daily Report Record</h1>
+<div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
+    <form id="addReportForm" method="POST" action="{{ url_for('add_production_report') }}">
+        <div class="mb-6">
+            <label for="time" class="block text-sm font-medium text-gray-700">Time</label>
+            <input type="text" id="time" name="time" placeholder="Contoh: 13.00-16.30" required class="mt-1 block w-full md:w-1/3 px-3 py-2 border border-gray-300 rounded-md">
+        </div>
+
+        <!-- Target -->
+        <fieldset class="border p-4 rounded-md mb-4">
+            <legend class="px-2 font-semibold">Target</legend>
+            <div class="grid grid-cols-2 gap-4">
+                <div><label for="target_qty" class="block text-sm text-gray-600">QTY</label><input type="number" id="target_qty" name="target_qty" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                <div><label for="target_total" class="block text-sm text-gray-600">Total</label><input type="number" id="target_total" name="target_total" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+            </div>
+        </fieldset>
+        
+        <!-- Components -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+            <fieldset class="border p-4 rounded-md mb-4">
+                <legend class="px-2 font-semibold">Holder</legend>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label for="holder_qty" class="block text-sm text-gray-600">QTY</label><input type="number" id="holder_qty" name="holder_qty" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                    <div><label for="holder_total" class="block text-sm text-gray-600">Total</label><input type="number" id="holder_total" name="holder_total" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border p-4 rounded-md mb-4">
+                <legend class="px-2 font-semibold">Main Machine</legend>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label for="main_machine_qty" class="block text-sm text-gray-600">QTY</label><input type="number" id="main_machine_qty" name="main_machine_qty" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                    <div><label for="main_machine_total" class="block text-sm text-gray-600">Total</label><input type="number" id="main_machine_total" name="main_machine_total" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border p-4 rounded-md mb-4">
+                <legend class="px-2 font-semibold">Lower Arm</legend>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label for="lower_arm_qty" class="block text-sm text-gray-600">QTY</label><input type="number" id="lower_arm_qty" name="lower_arm_qty" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                    <div><label for="lower_arm_total" class="block text-sm text-gray-600">Total</label><input type="number" id="lower_arm_total" name="lower_arm_total" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                </div>
+            </fieldset>
+            
+            <fieldset class="border p-4 rounded-md mb-4">
+                <legend class="px-2 font-semibold">Portafilter</legend>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label for="portafilter_qty" class="block text-sm text-gray-600">QTY</label><input type="number" id="portafilter_qty" name="portafilter_qty" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                    <div><label for="portafilter_total" class="block text-sm text-gray-600">Total</label><input type="number" id="portafilter_total" name="portafilter_total" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Output -->
+        <fieldset class="border p-4 rounded-md mb-4">
+            <legend class="px-2 font-semibold">Output & Reject</legend>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div><label for="reject" class="block text-sm text-gray-600">Reject</label><input type="number" id="reject" name="reject" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                <div><label for="output_qty" class="block text-sm text-gray-600">Output QTY</label><input type="number" id="output_qty" name="output_qty" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+                <div><label for="output_total" class="block text-sm text-gray-600">Output Total</label><input type="number" id="output_total" name="output_total" required class="mt-1 w-full px-3 py-2 border rounded-md"></div>
+            </div>
+        </fieldset>
+        
+        <!-- Notes -->
+        <div class="mb-6">
+            <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+            <textarea id="notes" name="notes" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end space-x-3 mt-6">
+            <a href="{{ url_for('view_production_report') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-lg">Batal</a>
+            <button type="button" onclick="window.confirmGenericSubmit('addReportForm', 'menambahkan data laporan ini')" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg">Simpan Record</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

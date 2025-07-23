@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="space-y-8">
+    <div>
+        <h2 class="text-3xl font-bold text-gray-800">Dashboard Produksi</h2>
+        <p class="mt-1 text-gray-600">Ringkasan aktivitas dan data modul produksi Anda.</p>
+    </div>
+
+    <!-- Baris Kartu Ringkasan (KPI Cards) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1: MPS Aktif -->
+        <div class="bg-gradient-to-br from-sky-500 to-sky-600 p-6 rounded-xl shadow-lg text-white">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-lg font-semibold">MPS Aktif</h3>
+                <i class="fa-solid fa-calendar-days text-3xl opacity-75"></i>
+            </div>
+            <p class="text-4xl font-bold">{{ active_mps_count }}</p>
+            <p class="text-sm opacity-80 mt-1">Jadwal Produksi Utama</p>
+        </div>
+
+        <!-- Card 2: Total Produk -->
+        <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 p-6 rounded-xl shadow-lg text-white">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-lg font-semibold">Total Produk</h3>
+                 <i class="fa-solid fa-box-archive text-3xl opacity-75"></i>
+            </div>
+            <p class="text-4xl font-bold">{{ total_products_count }}</p>
+            <p class="text-sm opacity-80 mt-1">Item Produk Terdefinisi</p>
+        </div>
+
+        <!-- Card 3: Permintaan Material -->
+        <div class="bg-gradient-to-br from-amber-500 to-amber-600 p-6 rounded-xl shadow-lg text-white">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-lg font-semibold">Permintaan Material</h3>
+                 <i class="fa-solid fa-file-import text-3xl opacity-75"></i>
+            </div>
+            <p class="text-4xl font-bold">{{ material_requests_count }}</p>
+            <p class="text-sm opacity-80 mt-1">Total Permintaan</p>
+        </div>
+        
+        <!-- Card 4: Laporan Produksi -->
+        <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 p-6 rounded-xl shadow-lg text-white">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-lg font-semibold">Laporan Produksi</h3>
+                <i class="fa-solid fa-chart-line text-3xl opacity-75"></i>
+            </div>
+            <p class="text-4xl font-bold">{{ reports_count }}</p>
+            <p class="text-sm opacity-80 mt-1">Total Laporan Harian</p>
+        </div>
+    </div>
+
+    <!-- Bagian Aksi Cepat -->
+    <div class="mt-10">
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Aksi Cepat</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <a href="{{ url_for('add_production_mps') }}" class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out text-center flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-plus"></i>
+                <span>Insert MPS Baru</span>
+            </a>
+            <a href="{{ url_for('add_request_material') }}" class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out text-center flex items-center justify-center space-x-2">
+                 <i class="fa-solid fa-plus"></i>
+                <span>Buat Permintaan Material</span>
+            </a>
+            <a href="{{ url_for('add_production_report') }}" class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out text-center flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-plus"></i>
+                <span>Tambah Laporan Harian</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Informasi Perusahaan -->
+    <div class="mt-10 bg-white p-6 rounded-lg shadow">
+         <div class="flex items-center mb-4">
+            <img src="/static/img/kopitech.jpeg" alt="Logo KopiTech Corp Small" class="mr-4 h-12 w-12 rounded-full">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800">KopiTech Corp</h3>
+                <p class="text-sm text-gray-500">Production Division</p>
+            </div>
+        </div>
+        <p class="text-gray-600 leading-relaxed">
+            Selamat datang di sistem informasi produksi KopiTech Corp. Gunakan menu di samping untuk mengelola jadwal produksi (MPS), permintaan material, produk dalam proses (WIP), produk jadi, dan laporan harian untuk memastikan proses berjalan dengan lancar dan efisien.
+        </p>
+    </div>
+</div>
+{% endblock %}

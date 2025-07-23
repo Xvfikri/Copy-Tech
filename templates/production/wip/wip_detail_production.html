@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Work in Progress</h1>
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-gray-700">Daftar WIP</h2>
+        <a href="{{ url_for('add_wip_detail') }}" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition">
+            + Add WIP
+        </a>
+    </div>
+
+    {% if items %}
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Product Name</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Quantity</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Process</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estimated Time</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for item in items %}
+                <tr>
+                    <td class="px-4 py-3 text-sm">{{ item.wip_id }}</td>
+                    <td class="px-4 py-3 text-sm font-medium">{{ item.product_name }}</td>
+                    <td class="px-4 py-3 text-sm text-center">{{ item.quantity }}</td>
+                    <td class="px-4 py-3 text-sm">{{ item.process }}</td>
+                    <td class="px-4 py-3 text-sm">
+                        {# Logika pewarnaan status #}
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            {% if item.status == 'warehouse' %} bg-blue-100 text-blue-800
+                            {% elif item.status == 'package' %} bg-cyan-100 text-cyan-800
+                            {% elif item.status == 'separator' %} bg-indigo-100 text-indigo-800
+                            {% elif item.status == 'queue' %} bg-gray-100 text-gray-800
+                            {% elif item.status == 'installation' %} bg-purple-100 text-purple-800
+                            {% elif item.status == 'queue half' %} bg-yellow-100 text-yellow-800
+                            {% elif item.status == 'assembly' %} bg-orange-100 text-orange-800
+                            {% elif item.status == 'paint' %} bg-pink-100 text-pink-800
+                            {% elif item.status == 'inspection' %} bg-teal-100 text-teal-800
+                            {% elif item.status == 'finished' %} bg-green-100 text-green-800
+                            {% else %} bg-gray-100 text-gray-800 {% endif %}">
+                            {{ item.status }}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-sm">{{ item.estimated_time }}</td>
+                    <td class="px-4 py-3 text-sm font-medium space-x-1">
+                        <a href="{{ url_for('edit_wip_detail', item_id=item.id) }}" class="bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-semibold py-1 px-3 rounded-md">Edit</a>
+                        <form id="deleteFormWip{{ item.id }}" action="{{ url_for('delete_wip_detail', item_id=item.id) }}" method="POST" class="inline">
+                            <button type="button" onclick="confirmDelete('deleteFormWip{{ item.id }}', 'WIP: {{ item.product_name }}')" class="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold py-1 px-3 rounded-md">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-gray-600">Belum ada data WIP.</p>
+    {% endif %}
+</div>
+{% endblock %}

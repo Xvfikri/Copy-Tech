@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Financial Report</h1>
+<div class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Add New Item</h2>
+    <form id="addFinanceForm" method="POST" action="{{ url_for('add_financial_report') }}">
+        <div class="space-y-4">
+            <div><label for="date" class="block text-sm font-medium text-gray-700">Date</label><input type="date" id="date" name="date" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div>
+                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                <select id="category" name="category" required class="mt-1 block w-full p-2 border rounded-md">
+                    <option value="Income">Income</option>
+                    <option value="Expense">Expense</option>
+                </select>
+            </div>
+            <div><label for="items" class="block text-sm font-medium text-gray-700">Items</label><input type="text" id="items" name="items" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div><label for="amount" class="block text-sm font-medium text-gray-700">Amount</label><input type="number" id="amount" name="amount" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div><label for="balance" class="block text-sm font-medium text-gray-700">Balance</label><input type="number" id="balance" name="balance" required class="mt-1 w-full p-2 border rounded-md"></div>
+        </div>
+        <div class="flex items-center justify-end space-x-3 mt-6">
+            <a href="{{ url_for('view_financial_report') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg">Cancel</a>
+            <button type="button" onclick="window.confirmGenericSubmit('addFinanceForm', 'menambahkan item ini')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">Save Item</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

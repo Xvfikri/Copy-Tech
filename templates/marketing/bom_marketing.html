@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800">Bill of Materials (Marketing View)</h2>
+        <button class="bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg disabled:opacity-50" disabled>+ Tambah BOM (Segera Hadir)</button>
+    </div>
+    {% if items %}
+    <p>Data BOM akan ditampilkan di sini (tampilan untuk Marketing).</p>
+    {% else %}
+    <p>Belum ada data BOM.</p>
+    {% endif %}
+</div>
+{% endblock %}

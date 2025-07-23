@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="bg-white p-0.5 rounded-lg shadow-md">
+    <div class="bg-orange-400 text-white p-4 rounded-t-lg mb-0 flex justify-between items-center">
+        <h2 class="text-xl font-semibold">Forecasting Data</h2>
+    </div>
+    <div class="p-6">
+        <div class="mb-6 flex justify-between items-center">
+            <a href="{{ url_for('add_forecasting_data') }}" class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md text-sm transition duration-150 ease-in-out">
+                Input Forecast
+            </a>
+            <div class="flex items-center space-x-2">
+                <select class="border border-gray-300 rounded-md text-sm p-2">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <span class="text-sm text-gray-600">entries per page</span>
+                <div class="relative ml-4">
+                    <input type="text" placeholder="Search..." class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm" style="min-width: 200px;">
+                    <span class="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        {% if items %}
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Period</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Forecast</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for item in items %}
+                    <tr>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700">{{ loop.index }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700">{{ item.period }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900 font-medium">{{ item.product }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700 text-center">{{ item.amount }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700 text-center">{{ item.forecast }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-1">
+                            <a href="{{ url_for('edit_forecasting_data', item_id=item.id) }}" class="bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-semibold py-1 px-2.5 rounded-md">Edit</a>
+                            <form id="deleteFormForecast{{ item.id }}" action="{{ url_for('delete_forecasting_data', item_id=item.id) }}" method="POST" class="inline">
+                                <button type="button" onclick="confirmDelete('deleteFormForecast{{ item.id }}', 'Forecast untuk {{ item.product }} periode {{ item.period }}')" class="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold py-1 px-2.5 rounded-md">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="text-xs text-gray-500 mt-3">Showing 1 to {{ items|length }} of {{ items|length }} entries</p>
+        {% else %}
+        <p class="text-gray-600">Belum ada data forecasting.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

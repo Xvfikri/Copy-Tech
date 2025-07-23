@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Request Material</h1>
+<div class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Add New Request</h2>
+    <form id="addWRequestForm" method="POST" action="{{ url_for('add_warehouse_request_material') }}">
+        <div class="space-y-4">
+            <div><label for="material_id" class="block text-sm font-medium text-gray-700">ID</label><input type="text" id="material_id" name="material_id" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div><label for="material_name" class="block text-sm font-medium text-gray-700">Material Name</label><input type="text" id="material_name" name="material_name" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div class="grid grid-cols-2 gap-4">
+                <div><label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label><input type="number" id="quantity" name="quantity" required class="mt-1 w-full p-2 border rounded-md"></div>
+                <div><label for="unit" class="block text-sm font-medium text-gray-700">Unit</label><input type="text" id="unit" name="unit" required class="mt-1 w-full p-2 border rounded-md"></div>
+            </div>
+            <div>
+                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                <select id="status" name="status" required class="mt-1 block w-full p-2 border rounded-md">
+                    <option value="Requested">Requested</option>
+                    <option value="Approved">Approved</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex items-center justify-end space-x-3 mt-6">
+            <a href="{{ url_for('view_warehouse_request_material') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg">Cancel</a>
+            <button type="button" onclick="window.confirmGenericSubmit('addWRequestForm', 'menambahkan request ini')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">Save Request</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

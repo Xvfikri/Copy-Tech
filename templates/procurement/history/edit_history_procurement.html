@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold text-gray-800 mb-6">History</h1>
+<div class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Edit History - #{{ item.no }}</h2>
+    <form id="editHistoryForm" method="POST" action="{{ url_for('edit_procurement_history', item_id=item.id) }}">
+        <div class="space-y-4">
+            <div><label class="block text-sm font-medium">Date</label><input type="date" name="date" value="{{ item.date }}" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div><label class="block text-sm font-medium">Vendor</label><input type="text" name="vendor" value="{{ item.vendor }}" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div><label class="block text-sm font-medium">Material Name</label><input type="text" name="material_name" value="{{ item.material_name }}" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div><label class="block text-sm font-medium">Quantity</label><input type="number" name="quantity" value="{{ item.quantity }}" required class="mt-1 w-full p-2 border rounded-md"></div>
+            <div>
+                <label class="block text-sm font-medium">Status</label>
+                <select name="status" required class="mt-1 block w-full p-2 border rounded-md">
+                    <option value="on shipping" {% if item.status == 'on shipping' %}selected{% endif %}>On Shipping</option>
+                    <option value="arrived" {% if item.status == 'arrived' %}selected{% endif %}>Arrived</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex items-center justify-end space-x-3 mt-6">
+            <a href="{{ url_for('view_procurement_history') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg">Cancel</a>
+            <button type="button" onclick="window.confirmGenericSubmit('editHistoryForm', 'memperbarui histori ini')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">Update History</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
